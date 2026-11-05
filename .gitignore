@@ -1,0 +1,29 @@
+
+# Android and Gradle
+.gradle/
+**/build/
+local.properties
+
+# Node.js
+node_modules/
+
+# Environment variables and API keys
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+build-error.txt
+build-errors.txt
+build-log.txt
+errors.txt
+
+# Signing keys and credentials
+*.jks
+*.keystore
+debug.keystore
+
+# IDE files
+.idea/
+.DS_Store

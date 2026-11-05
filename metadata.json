@@ -1,0 +1,6 @@
+{
+  "name": "Camera",
+  "description": "A glassmorphism camera app with dynamic hardware detection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
