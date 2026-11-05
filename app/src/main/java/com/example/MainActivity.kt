@@ -24,8 +24,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ui.LiquidCameraScreen
 import com.example.ui.theme.MyApplicationTheme
+import com.example.update.FirebaseBootstrap
+import com.example.update.UpdateDialogHost
+import com.example.update.UpdateViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -54,6 +58,12 @@ class MainActivity : ComponentActivity() {
     insetsController.isAppearanceLightNavigationBars = false
 
     enableEdgeToEdge()
+
+    // Make sure the default FirebaseApp exists before anything (the updater) uses Firestore/Storage.
+    // Normally FirebaseInitProvider does this automatically; this is an idempotent, non-throwing
+    // fallback. If the Firebase config is missing it only logs and the updater stays disabled.
+    FirebaseBootstrap.ensureInitialized(applicationContext)
+
     setContent {
       MyApplicationTheme {
         val permissionsState = rememberMultiplePermissionsState(
@@ -64,6 +74,10 @@ class MainActivity : ComponentActivity() {
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
+
+        // In-app updater: silent check at startup, dialogs only appear when an update is available.
+        val updateViewModel: UpdateViewModel = viewModel()
+        LaunchedEffect(Unit) { updateViewModel.checkForUpdate(silent = true) }
         
         Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {
             val isCameraGranted = permissionsState.permissions.find { it.permission == android.Manifest.permission.CAMERA }?.status?.isGranted == true
@@ -147,10 +161,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        // Renders nothing while Idle; also forwards ON_RESUME so installation continues
+        // automatically after the user grants "Install unknown apps".
+        UpdateDialogHost(updateViewModel)
       }
     }
   }
 }
-
-
-

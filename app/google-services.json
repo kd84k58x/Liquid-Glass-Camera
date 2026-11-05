@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "523323868387",
+    "project_id": "liquid-camera-6d600",
+    "storage_bucket": "liquid-camera-6d600.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523323868387:android:e72d924f045bbb22cd71d6",
+        "android_client_info": {
+          "package_name": "com.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7OPTs7XD_FOF7zgHdUMK8BU0UKulz32k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523323868387:android:048375c85a381b8dcd71d6",
+        "android_client_info": {
+          "package_name": "com.liquid.camera.rudraksha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7OPTs7XD_FOF7zgHdUMK8BU0UKulz32k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
